@@ -1,0 +1,57 @@
+@page "/Character"
+@inject HttpClient Http
+
+<PageTitle>Character Page</PageTitle>
+
+<h1>Character</h1>
+
+<p>En esta pagina se va a estar exponiendo los Characters</p>
+
+
+@if (pj == null)
+{
+    <p><em>Cargando... espere por favor no sea impaciente calmese sapo</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Species</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var personaje in pj)
+            {
+                <tr>
+                    <td>@personaje.name</td>
+                    <td>@personaje.status</td>
+                    <td>@personaje.species</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code{
+
+   private personaje[]? pj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pj = await Http.GetFromJsonAsync<personaje[]>("sample-data/weather.json");
+    }
+
+    public class personaje{
+
+        public string? name{get; set;}
+         public string? status{get; set;}
+          public string? species{get; set;}
+
+    }
+
+}

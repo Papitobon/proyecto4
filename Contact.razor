@@ -1,0 +1,54 @@
+@page "/contact"
+
+<form @onsubmit="Send"  class="container">
+
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Primer nombre</label>
+  <input @bind="Name" type="text" class="form-control" id="name" >
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
+  <input @bind="Email" type="text" class="form-control" id="last_name" >
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Numero telefonico</label>
+  <input @bind="Phone" type="text" class="form-control" id="last_name" >
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Mensaje</label>
+  <input @bind="Message" type="text" class="form-control" id="last_name" >
+</div>
+
+<button type="submit" class="btn btn-dark">Enviar</button>
+</form> 
+<div>
+  @if (Show)
+  {
+  <p>Hola soy: @Name , Quiero contactarme con ustedes por el siguiente mensaje</p>
+  <p> @Message</p>
+  <p>puede comunicarse conmigo en:</p>
+  <p>Email: @Email</p>
+  <p>Numero telefonico: @Phone</p>
+  }
+ 
+  
+</div>
+@code {
+    private string? Name{get;set;}
+    private string? Email{get;set;}
+    private int? Phone {get;set;}
+    private string? Message {get;set;}
+
+    public bool Show = false;
+    public void Send()
+    {
+      if (this.Name !="" && this.Email !="" && this.Phone != null && this.Message !=""){
+        this.Show= true;
+      }
+    }
+
+    public void evento()
+    {
+      Console.WriteLine("Enviado");
+    }
+}
